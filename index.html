@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<htmlL lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <title>Form</title>
+</head>
+<body  class="bg-blue-500">
+    <form class="formbody">
+        <label for="ename" >Employee Name</label>
+        <input class="formin" id="ename" type="text" name="name" placeholder="Employee name">
+        <br>
+        <label for="email">email</label>
+        <input class="formin" type="email" id="email"name="mailid" placeholder="email">
+        <span id="email-error"></span>
+        <br>
+        <label for="number">Phone number</label>
+        <input class="formin" type="tel" id="number" name="phonenumber" placeholder="Phone number">
+        <br>
+        <label for="gender">Gender</label>
+        <input class="formin" type="text" id="gender " name="gender" placeholder="Gender">
+        <br>
+        <label for="quali">Qualification</label>
+        <input class="formin" type="text"  id="quali" name="qualification" placeholder="Address">
+        <br>
+        <label for="pexp">Past Experience</label>
+        <input class="formin" id="pexp" type="int"   name="year_past" placeholder="past exp">
+        <br>
+        <label for="preexp">Present Experince</label>
+        <input class="formin" id="preexp" type="date" name="year_present" placeholder="joined date">
+        <br>
+        <button  class="nextbt" type="submit">Submit</button>
+        <button  class="nextbt">
+            <a href="/data.html">Show data</a>
+        </button>
+    </form>
+    <script>
+        //for email validation
+        const emailInput = document.getElementById('email');
+        const emailError = document.getElementById('email-error');
+
+        const post=async(data)=>{
+            const res=await fetch('http://localhost:3000',{
+                method:'POST',
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                body:JSON.stringify(data)
+            });
+            const postResp=await res.json();
+            console.log(postResp);
+        }
+        const form = document.querySelector('form');
+     form.addEventListener('submit', (e) => {
+      e.preventDefault();
+    //   if (validateEmail(emailInput.value)) {
+    //     form.submit();
+    //   } else {
+    //  emailError.textContent = 'Please enter a valid email address';
+    //   }
+      const data = {};
+      const inputs = form.querySelectorAll('input');
+     inputs.forEach((input) => {
+    data[input.name] = input.value;
+    console.log(data)
+  });
+  post(data);
+});
+        
+    </script>
+</body>
+</html>

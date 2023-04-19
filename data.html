@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        table{
+        border:"2px solid black";
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data</title>
+</head>
+<body>
+    <table border="1">
+    </table>
+    <button><a href="index.html">Back</a></button>
+    <script>
+        const get=async()=>{
+            const data=await fetch('http://localhost:3000')
+            const d=await data.json();
+            content=`
+            <tr>
+                <th>Name</th>
+                <th>Email Id</th>
+                <th>Phone Number</th>
+                <th>Gender</th>
+                <th>Qualification</th>
+                <th>Past Exp</th>
+                <th>Present join date</th>
+                <th>Present working(days)</th>
+                
+            </tr>
+            `;
+            d.forEach(e=> {
+                content+=`
+                <tr>
+                <td>${e.name}</td>
+                <td>${e.mailid}</td>
+                <td>${e.phonenumber}</td>
+                <td>${e.gender}</td>
+                <td>${e.qualification}</td>
+                <td>${e.year_past}</td>
+                <td>${e.year_present}</td>
+                
+            </tr>
+                `
+            });
+            const t=document.querySelector('table')
+            t.innerHTML=content
+        }
+        get();
+        
+    </script>
+</body>
+</html>
